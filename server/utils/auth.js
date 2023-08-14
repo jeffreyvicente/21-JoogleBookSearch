@@ -1,3 +1,4 @@
+//File should not be changed
 const jwt = require('jsonwebtoken');
 
 // set token secret and expiration date
