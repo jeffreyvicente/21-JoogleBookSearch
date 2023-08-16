@@ -18,24 +18,23 @@ const resolvers = {
         userId: async (parent, {_id}) => {
             return User.findOne({_id});
         } 
-
     },
 
     Mutation: {
-        addUser: async (parent,{username, email, password}) => {
-            const user = await User.create(username, email, password);
+        addUser: async (parent,args) => {
+            const user = await User.create(args);
             const token = signToken(user);
             return {token, user};
         },
 
-        login: async (parent, {body}) => {
-            const user = await User.findOne({ $or: [{ username: body.username }, { email: body.email }] });
+        login: async (parent, {email ,password}) => {
+            const user = await User.findOne({ email });
             
             if (!user) {
                 throw new AuthenticationError("No user found with this email address")
             }
 
-            const correctPW = await user.isCorrectPassword(body.password);
+            const correctPW = await user.isCorrectPassword(password);
             if (!correctPW){
                 throw new AuthenticationError("Incorrect credentials");
             }
@@ -65,10 +64,17 @@ const resolvers = {
             if(context.user){
                 const updatedUser = await User.findOneAndUpdate(
                     {_id: context.user._id},
-                    {$pull: {savebook: {bookId: args.bookId}}},
+                    {$pull: {savedBooks: {bookId: args.bookId}}},
+                    {new:true}
                 );
+
+                console.log(updatedUser);
+                return updatedUser;
             }
             
+            throw new AuthenticationError("Could not find user with this ID")
         }
     },  
 };
+
+module.exports = resolvers;
