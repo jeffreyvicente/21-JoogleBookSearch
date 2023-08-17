@@ -9,16 +9,14 @@ const {signToken} =  require('../utils/auth');
 
 const resolvers = {
     Query: {
-        //returns if the user name exist. 
-        user: async (parent, {username}) => {
-            return User.findOne({username});
+        me: async (parent, args, context) => {
+          if (context.user) {
+            const userData = await User.findOne({ _id: context.user._id }).select('-__v -password');
+            return userData;
+          }
+          throw new AuthenticationError("You need to be logged in!");
         },
-
-        //finds a user by the ID. 
-        userId: async (parent, {_id}) => {
-            return User.findOne({_id});
-        } 
-    },
+      },
 
     Mutation: {
         addUser: async (parent,args) => {
@@ -46,13 +44,13 @@ const resolvers = {
 
            // By adding context to our query, we can retrieve the logged in user without specifically searching for them
 
-        savebook: async (parent, args, context) => {
-            console.log(context);
+        saveBook: async (parent, {newBook}, context) => {
+            //console.log(context);
             if(context.user){
                 const updatedUser = await User.findOneAndUpdate(
-                  {_id: user._id},
-                  {$addToSet: {savedBooks: args.input}},
-                  {new: true, runValidators: true}
+                    { _id: context.user._id },
+                    { $push: { savedBooks: newBook }},
+                    { new: true }
                 );
 
                 return updatedUser;
@@ -60,15 +58,15 @@ const resolvers = {
             throw new AuthenticationError("You need to be logged in");
         },
 
-        deleteBook: async(parent, args, context) => {
+        removeBook: async(parent, {bookId}, context) => {
             if(context.user){
                 const updatedUser = await User.findOneAndUpdate(
-                    {_id: context.user._id},
-                    {$pull: {savedBooks: {bookId: args.bookId}}},
-                    {new:true}
+                    { _id: context.user._id },
+                    { $pull: { savedBooks: { bookId }}},
+                    { new: true }
                 );
 
-                console.log(updatedUser);
+                //console.log(updatedUser);
                 return updatedUser;
             }
             
