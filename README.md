@@ -68,17 +68,17 @@ View Joogle Book Search hosted on [Heroku](https://jeffreyvicente.github.io/20-P
 ![alt text](/media/Google%20Book%20Search.gif)
 
 
-
 ## Features
 The Joogle Book Search has the following pages:
-- About Me - In the About Me section, you'll find a recent photo or avatar of me, along with a brief bio. 
-- Portfolio - The Portfolio section highlights some of my noteworthy projects.
-- Contact - Have a question or want to collaborate? The Contact section provides a convenient way to get in touch. 
-- Resume - Explore my qualifications and proficiencies in the Resume section. 
+- Search for Books
+- Login/Signup
+- Saving and Managing Books
+- Logout
 
 ## Technologies Used
 - HTML5
 - JavaScript 
 - React
-- Bootstrap
+- Google Books API
+- JSON Web Tokens 
 
