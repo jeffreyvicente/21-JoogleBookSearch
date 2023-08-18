@@ -1,8 +1,7 @@
 # JoogleBookSearch
 
 ## Description
-Welcome to my web developer portfolio! This react page showcases my skills, projects, and contact information. 
-Feel free to explore different sections and learn more about me.
+The JoogleBookSearch is a web application that allows users to search for books, view book details, and save books to their account. Users can also create accounts, log in, and manage their saved books.
 
 ## Table of Contents
 
@@ -66,7 +65,7 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 ## Preview
 View Joogle Book Search hosted on [Heroku](https://jeffreyvicente.github.io/20-PersonalReactPortfolio/#home)
 
-![alt text](/src/assets/images/projectImages/portfolioDemo.gif)
+![alt text](/media/Google%20Book%20Search.gif)
 
 
 
