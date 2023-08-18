@@ -63,7 +63,7 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 ```
 
 ## Preview
-View Joogle Book Search hosted on [Heroku](https://jeffreyvicente.github.io/20-PersonalReactPortfolio/#home)
+View Joogle Book Search hosted on [Heroku](https://infinite-mountain-80822-4c806e7f779a.herokuapp.com/)
 
 ![alt text](/media/Google%20Book%20Search.gif)
 
